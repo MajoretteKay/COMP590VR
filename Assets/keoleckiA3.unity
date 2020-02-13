@@ -6586,14 +6586,14 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1252088825}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &487170527
+--- !u!20 &487170522
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487170521}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -6657,13 +6657,16 @@ MonoBehaviour:
   oVRCameraRig: {fileID: 1302292041}
   oVRManager: {fileID: 1302292040}
   oVRHeadsetEmulator: {fileID: 1302292039}
-  camera: {fileID: 487170527}
+  camera: {fileID: 487170522}
   collectibles:
   - {fileID: 3131367751843255160, guid: 356adf95998dd424c985e0352a08bb45, type: 3}
   - {fileID: 4190820742999425769, guid: 61b06a0867090e840bb7c7530c70b83d, type: 3}
   - {fileID: 3765966736017025489, guid: 44deac3af21061c428021d68d974d26a, type: 3}
   inventory: {fileID: 487170528}
   score: {fileID: 901273535}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &510019383
 GameObject:
   m_ObjectHideFlags: 0

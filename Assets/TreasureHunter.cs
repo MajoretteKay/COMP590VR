@@ -15,6 +15,8 @@ public class TreasureHunter : MonoBehaviour
     public TextMeshPro score;
     float currentScore;
 
+    public LayerMask layerMask;
+
 
 
     
@@ -31,13 +33,14 @@ public class TreasureHunter : MonoBehaviour
     {
         float temp = 0;
 
-        RaycastHit hit;
-        Ray ray = new Ray();
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, 50000)) {
-            Debug.Log("Raycast hit");
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit)) {
+            Debug.Log(hit.collider.name);
             temp = hit.collider.gameObject.GetComponent<Collectible>().points;
-        }
+            }
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
+        
             if (temp == 1) {
                 inventory.inventory.Add(collectibles[2]);
             } else if (temp == 2) {
@@ -46,10 +49,12 @@ public class TreasureHunter : MonoBehaviour
                 inventory.inventory.Add(collectibles[0]);
             }
             Destroy(hit.collider.gameObject);
-        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            score.text = "Score:" + calculateScore() + "Kay Olecki";
         }
-    }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            score.text = "Score:" + calculateScore() + "  Kay Olecki";
+        }
+        }
+    
 
     float calculateScore() {
        List<Collectible> collected = this.gameObject.GetComponent<TreasureHunterInventory>().inventory;
@@ -61,3 +66,4 @@ public class TreasureHunter : MonoBehaviour
        return totalScore;
     }   
 }
+
