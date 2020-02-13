@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    public int points;
+    public float points;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +14,5 @@ public class Collectible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

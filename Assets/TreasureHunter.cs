@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
 public class TreasureHunter : MonoBehaviour
 {
     public OVRCameraRig oVRCameraRig;
@@ -12,8 +13,9 @@ public class TreasureHunter : MonoBehaviour
     public List<Collectible> collectibles;
     public TreasureHunterInventory inventory;
     public TextMeshPro score;
-    public TextMeshPro win;
     float currentScore;
+
+
 
     
 
@@ -27,33 +29,35 @@ public class TreasureHunter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float temp = 0;
+
+        RaycastHit hit;
+        Ray ray = new Ray();
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, 50000)) {
+            Debug.Log("Raycast hit");
+            temp = hit.collider.gameObject.GetComponent<Collectible>().points;
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            if (!(this.gameObject.GetComponent<TreasureHunterInventory>().inventory.Contains(collectibles[0]))) {
-                this.gameObject.GetComponent<TreasureHunterInventory>().inventory.Add(collectibles[0]);
+            if (temp == 1) {
+                inventory.inventory.Add(collectibles[2]);
+            } else if (temp == 2) {
+                inventory.inventory.Add(collectibles[1]);
+            } else if (temp == 3) {
+                inventory.inventory.Add(collectibles[0]);
             }
-     } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-         if (!(this.gameObject.GetComponent<TreasureHunterInventory>().inventory.Contains(collectibles[1]))) {
-                this.gameObject.GetComponent<TreasureHunterInventory>().inventory.Add(collectibles[1]);
-            }
-     } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-         if (!(this.gameObject.GetComponent<TreasureHunterInventory>().inventory.Contains(collectibles[2]))) {
-                this.gameObject.GetComponent<TreasureHunterInventory>().inventory.Add(collectibles[2]);
-            }
-     } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
-             score.text = "Score:" + calculateScore() + " (" + this.gameObject.GetComponent<TreasureHunterInventory>().inventory.Count + " items)";
-     }
-     if (this.gameObject.GetComponent<TreasureHunterInventory>().inventory.Contains(collectibles[0]) && this.gameObject.GetComponent<TreasureHunterInventory>().inventory.Contains(collectibles[1]) && this.gameObject.GetComponent<TreasureHunterInventory>().inventory.Contains(collectibles[2])) {
-          win.text = "You won!";
-     }
+            Destroy(hit.collider.gameObject);
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            score.text = "Score:" + calculateScore() + "Kay Olecki";
+        }
     }
 
     float calculateScore() {
-        List<Collectible> collected = this.gameObject.GetComponent<TreasureHunterInventory>().inventory;
-        float totalScore=0;
-        foreach(Collectible item in collected) {
-            totalScore+=item.points;
-        }
-        currentScore = totalScore;
-        return totalScore;
+       List<Collectible> collected = this.gameObject.GetComponent<TreasureHunterInventory>().inventory;
+       float totalScore=0;
+       foreach(Collectible item in collected) {
+           totalScore+=item.points;
+       }
+       currentScore = totalScore;
+       return totalScore;
     }   
 }
