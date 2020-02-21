@@ -85,8 +85,9 @@ public class PickUpPutDown : MonoBehaviour
         //detach
         joint.connectedBody= null;
         // add to inventory if nearby body
-        float distance = Vector3.Distance(current.transform.position, body.transform.position);
-        if (-1 < distance && distance < 1) {
+        Collider[] collision = Physics.OverlapSphere(body.transform.position, 2);
+
+        if (collision.Length > 0) {
            if (current.points == 1) {
                body.inventory.inventory.Add(body.collectibles[0]);
                Destroy(current);
