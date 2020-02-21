@@ -5,6 +5,8 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     public float points;
+    [HideInInspector]
+    public PickUpPutDown active = null;
     // Start is called before the first frame update
     void Start()
     {
