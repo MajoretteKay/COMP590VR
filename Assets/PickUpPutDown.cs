@@ -85,19 +85,23 @@ public class PickUpPutDown : MonoBehaviour
         //detach
         joint.connectedBody= null;
         // add to inventory if nearby body
-        float distance = (current.transform.position - (body.transform.position - new Vector3(0,1,0))).sqrMagnitude;
+        float distance = Vector3.Distance(current.transform.position, body.transform.position);
         if (-1 < distance && distance < 1) {
            if (current.points == 1) {
                body.inventory.inventory.Add(body.collectibles[0]);
+               Destroy(current);
            } 
            if (current.points == 2) {
                body.inventory.inventory.Add(body.collectibles[1]);
+               Destroy(current);
            } 
            if (current.points == 3) {
                body.inventory.inventory.Add(body.collectibles[2]);
+               Destroy(current);
            } 
            if (current.points == 4) {
                body.inventory.inventory.Add(body.collectibles[3]);
+               Destroy(current);
            } 
 
         }
