@@ -59,7 +59,7 @@ public class TreasureHunter : MonoBehaviour
         //     score.text = "Score:" + calculateScore() + "  Kay Olecki";
         // }
     itemsCollected();
-    score.text = "Score:" + calculateScore() + "Total:" + inventory.inventory.Count + "Kay Olecki";
+    score.text = "Score: " + calculateScore() + " Total: " + inventory.inventory.Count + " Kay Olecki and Alan Patterson";
 
 }
     

@@ -7,6 +7,7 @@ using Valve.VR;
 public class PickUpPutDown : MonoBehaviour
 {
     public TreasureHunter body;
+    public Camera head;
     public SteamVR_Action_Boolean grab = null;
 
     SteamVR_Behaviour_Pose pose = null;
@@ -25,7 +26,7 @@ public class PickUpPutDown : MonoBehaviour
     // Update is called once per frame
     void Update()   {
         //Down
-        if (grab.GetStateDown(pose.inputSource)) {
+        if (grab.GetStateDown(pose.inputSource)){
             PickUp();
         }
         //Up
@@ -51,8 +52,9 @@ public class PickUpPutDown : MonoBehaviour
     }
 
     public void PickUp() {
-        // get nearest
+         // get nearest
         current = GetNearest();
+        
         // null check
         if (current == null) {
             return;
@@ -70,6 +72,7 @@ public class PickUpPutDown : MonoBehaviour
         joint.connectedBody = target;
         //set acive hand
         current.active = this;
+        name = current.gameObject.name;
 
     }
 
@@ -85,27 +88,57 @@ public class PickUpPutDown : MonoBehaviour
         //detach
         joint.connectedBody= null;
         // add to inventory if nearby body
-        Collider[] collision = Physics.OverlapSphere(body.transform.position, 2);
-
-        if (collision.Length > 0) {
-           if (current.points == 1) {
-               body.inventory.inventory.Add(body.collectibles[0]);
-               Destroy(current);
-           } 
-           if (current.points == 2) {
-               body.inventory.inventory.Add(body.collectibles[1]);
-               Destroy(current);
-           } 
-           if (current.points == 3) {
-               body.inventory.inventory.Add(body.collectibles[2]);
-               Destroy(current);
-           } 
-           if (current.points == 4) {
-               body.inventory.inventory.Add(body.collectibles[3]);
-               Destroy(current);
-           } 
-
-        }
+        Collider[] collision = Physics.OverlapSphere((head.transform.position - new Vector3(0,0.5f,0)), 0.25f);
+            for(var i = 0; i < collision.Length; i++) {
+                if (collision[i].gameObject == current.gameObject) {
+                    if (current.points == 1) {
+                        body.inventory.inventory.Add(body.collectibles[0]);
+                        //clear variables
+                        contacted.Remove(collision[i].gameObject.GetComponent<Collectible>());
+                        current.active = null;
+                        current = null;
+                        
+                        
+                        Destroy(collision[i].gameObject); // not the script one, still didn't work fml
+                        break;
+                        
+                    } 
+                    if (current.points == 2) {
+                        body.inventory.inventory.Add(body.collectibles[1]);
+                        contacted.Remove(collision[i].gameObject.GetComponent<Collectible>());
+                        //clear variables
+                        current.active = null;
+                        current = null;
+                        
+                        Destroy(collision[i].gameObject);
+                        break;
+                        
+                    } 
+                    if (current.points == 3) {
+                        body.inventory.inventory.Add(body.collectibles[2]);
+                        contacted.Remove(collision[i].gameObject.GetComponent<Collectible>());
+                        //clear variables
+                        current.active = null;
+                        current = null;
+                       
+                        Destroy(collision[i].gameObject);
+                        break;
+                        
+                    } 
+                    if (current.points == 4) {
+                        body.inventory.inventory.Add(body.collectibles[3]);
+                        contacted.Remove(collision[i].gameObject.GetComponent<Collectible>());
+                        //clear variables
+                        current.active = null;
+                        current = null;
+                       
+                        Destroy(collision[i].gameObject);
+                        break;
+                        
+                    } 
+                }
+            }
+    
 
         //clear variables
         current.active = null;
