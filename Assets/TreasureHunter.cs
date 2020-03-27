@@ -13,12 +13,7 @@ public class TreasureHunter : MonoBehaviour
     // switched to HTCVive
     public List<Collectible> collectibles;
     public TreasureHunterInventory inventory;
-    public TextMeshPro score;
-    public TextMeshPro commont;
-    public TextMeshPro uncommont;
-    public TextMeshPro raret;
-    public TextMeshPro ultrat;
-    float currentScore;
+    public Camera camera;
     
 
 
@@ -32,10 +27,25 @@ public class TreasureHunter : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    // Update is called once per frameS
     void Update()
     {
-        // A4 Code commented out for A5
+        // A7 code start here
+        // hit RaycastHit;
+        // if (Input.GetMouseButtonDown(0)){ // if left mouse button pressed...
+        //  // get ray starting at camera position and passing through the mouse pointer:
+        //  Raycast ray = camera.ScreenPointToRay(Input.mousePosition);
+        //  RaycastHit hit; // allocate variable RaycastHit
+        //  if (Physics.Raycast(ray, hit)){ // if something hit...
+        //    print("Clicked on "+ hit.transform.name); // name of hit object
+        //    inventory.inventory.Add(hit.transform.GameObject); // add to inventory
+        //  } else {
+        //    print("Nothing hit");
+        //  }
+   }
+
+    
+        // A4 Code commented out for A7
         // float temp = 0;
 
         //     RaycastHit hit;
@@ -58,46 +68,46 @@ public class TreasureHunter : MonoBehaviour
         // if (Input.GetKeyDown(KeyCode.Alpha2)) {
         //     score.text = "Score:" + calculateScore() + "  Kay Olecki";
         // }
-    itemsCollected();
-    score.text = "Score: " + calculateScore() + " Total: " + inventory.inventory.Count + " Kay Olecki and Alan Patterson";
+        // itemsCollected();
+        //score.text = "Score: " + calculateScore() + " Total: " + inventory.inventory.Count + " Kay Olecki and Alan Patterson";
 
 }
     
-    public void itemsCollected() {
-        List<Collectible> collected = this.gameObject.GetComponent<TreasureHunterInventory>().inventory;
-        float common=0;
-        float uncommon=0;
-        float rare=0;
-        float ultra=0;
-        foreach(Collectible item in collected) {
-            if (item.points == 1) {
-                common++;
-            }
-            if (item.points == 2) {
-                uncommon++;
-            }
-            if (item.points == 3) {
-                rare++;
-            }
-            if (item.points == 4) {
-                ultra++;
-            }  
-       }
-       commont.text = "Common:" + common;
-       uncommont.text = "Uncommon:" + uncommon;
-       raret.text = "Rare:" + rare;
-       ultrat.text = "Ultra Rare:" + ultra;
+    // public void itemsCollected() {
+    //     List<Collectible> collected = this.gameObject.GetComponent<TreasureHunterInventory>().inventory;
+    //     float common=0;
+    //     float uncommon=0;
+    //     float rare=0;
+    //     float ultra=0;
+    //     foreach(Collectible item in collected) {
+    //         if (item.points == 1) {
+    //             common++;
+    //         }
+    //         if (item.points == 2) {
+    //             uncommon++;
+    //         }
+    //         if (item.points == 3) {
+    //             rare++;
+    //         }
+    //         if (item.points == 4) {
+    //             ultra++;
+    //         }  
+    //    }
+    //    commont.text = "Common:" + common;
+    //    uncommont.text = "Uncommon:" + uncommon;
+    //    raret.text = "Rare:" + rare;
+    //    ultrat.text = "Ultra Rare:" + ultra;
 
-    }
+    // }
 
-    float calculateScore() {
-       List<Collectible> collected = this.gameObject.GetComponent<TreasureHunterInventory>().inventory;
-       float totalScore=0;
-       foreach(Collectible item in collected) {
-           totalScore+=item.points;
-       }
-       currentScore = totalScore;
-       return totalScore;
-    }   
-}
+//     float calculateScore() {
+//        List<Collectible> collected = this.gameObject.GetComponent<TreasureHunterInventory>().inventory;
+//        float totalScore=0;
+//        foreach(Collectible item in collected) {
+//            totalScore+=item.points;
+//        }
+//        currentScore = totalScore;
+//        return totalScore;
+//     }   
+ 
 
