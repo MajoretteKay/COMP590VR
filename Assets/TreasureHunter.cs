@@ -14,12 +14,14 @@ public class TreasureHunter : MonoBehaviour
     public List<Collectible> collectibles;
     public TreasureHunterInventory inventory;
     public Camera camera;
-    
-
-
+    public GameObject item;
 
     
-
+    void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("OnCollisionEnter is happening");
+        Destroy(other.gameObject);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,7 @@ public class TreasureHunter : MonoBehaviour
     // Update is called once per frameS
     void Update()
     {
+    
         // A7 code start here
         // hit RaycastHit;
         // if (Input.GetMouseButtonDown(0)){ // if left mouse button pressed...
